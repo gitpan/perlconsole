@@ -6,7 +6,6 @@
     * History saved in ~/.perlconsole_history
     * Support for a ~/.perlconsolerc (every line in that file 
       will be evaluated at launch time)
-    * the rcfile can be overrided by --rcfile=<FILE> on the command line
     * Added a real namespace to the console, each variable declared
       with "my" are persistent in the session.
     * The console runs in strict mode.

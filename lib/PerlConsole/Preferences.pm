@@ -13,7 +13,7 @@ sub init
 {
     my $self = {
         _valid_values => {
-            output => ['scalar', 'dumper', 'yaml', 'dump'],
+            output => ['scalar', 'dumper', 'yaml', 'dump', 'dds'],
         },
         _values => {
             output => "scalar"

@@ -20,6 +20,35 @@
 # with all the namespaces loaded during your session.
 # This is the main script of the program.
 
+# strict mode 
+use strict;
+use warnings;
+
+# libs
+use PerlConsole;
+use PerlConsole::Console;
+
+# Init our console
+my $console = PerlConsole::Console->new($PerlConsole::VERSION);
+
+# look for option in the commandline
+$console->parse_options();
+
+# display the header message
+$console->header();
+
+# source the rcfile first
+$console->source_rcfile();
+
+# Main REPL, prompting and waiting for code to evaluate
+while (defined (my $code = $console->getInput())) {
+    $console->interpret($code);
+} 
+
+# End, quitting.
+$console->clean_exit(0);
+
+__END__
 =pod
 
 =head1 NAME
@@ -39,10 +68,6 @@ It uses Readline to grab input, and provides completion with all the namespaces
 loaded during your session. It allows you to load a module in your session and
 test a function exported by it.
 
-=head1 OPTIONS
-
-B<--rcfile>=<FILE> : change the file parsed at startup (see RCFILE).
-
 =head1 COMMANDS
 
 It's possible to interact with the console with internal commands. The
@@ -61,7 +86,7 @@ following commands are supported in this version:
 =head1 RCFILE
 
 PerlConsole will look for a rcfile located in your home directory called:
-~/.perlconsolerc (or wherever you pointed to with "--rcifle").
+~/.perlconsolerc
 
 Every line in that file will be evaluated as if they were issued in the console.
 You can then load there your favorite modules, or even define your preferences.
@@ -89,35 +114,4 @@ For details about commands, ype :help <command> within the console.
 
 Perl Console was writen by Alexis Sukrieh <sukria@sukria.net>.
 
-This manpage was written by Alexis Sukrieh for the Debian system but may be
-used for others.
-
 =cut
-
-# strict mode 
-use strict;
-use warnings;
-
-# libs
-use PerlConsole;
-use PerlConsole::Console;
-
-# Init our console
-my $console = PerlConsole::Console->new($PerlConsole::VERSION);
-
-# look for option in the commandline
-$console->parse_options();
-
-# source the rcfile first
-$console->source_rcfile();
-
-# display the header message
-$console->header();
-
-# Main loop, prompting and waiting for code to evaluate
-while (defined (my $code = $console->getInput())) {
-    $console->interpret($code);
-} 
-
-# End, quitting.
-$console->clean_exit(0);
